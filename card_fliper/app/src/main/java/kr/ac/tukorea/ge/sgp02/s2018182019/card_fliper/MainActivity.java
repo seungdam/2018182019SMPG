@@ -18,12 +18,29 @@ public class MainActivity extends AppCompatActivity {
             R.id.card_30,R.id.card_31,R.id.card_32,R.id.card_33
     };
 
+    private int[] imageResourceIds = new int[] {
+            R.mipmap.card_as,R.mipmap.card_2c,R.mipmap.card_3d,R.mipmap.card_4h,
+            R.mipmap.card_5s,R.mipmap.card_jc,R.mipmap.card_qh,R.mipmap.card_kd,
+            R.mipmap.card_as,R.mipmap.card_2c,R.mipmap.card_3d,R.mipmap.card_4h,
+            R.mipmap.card_5s,R.mipmap.card_jc,R.mipmap.card_qh,R.mipmap.card_kd,
+    };
     private ImageButton previousButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startGame();
+    }
+
+    public void startGame() {
+        for(int i  = 0; i < imageResourceIds.length; ++i) {
+            int resourceId = imageResourceIds[i];
+            ImageButton btn = findViewById(BUTTON_IDS[i]);
+            btn.setTag(resourceId);
+        }
+
+
     }
 
     public void onBtnCard(View view) {
@@ -32,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "Not an imagebutton: " + view);
             return;
         }
+
         ImageButton currentButton = (ImageButton) view;
         if(previousButton == currentButton) {
             Log.d(TAG, "This card Already pressed");
@@ -39,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d(TAG,"card pressed " + btnIndex);
 
-        currentButton.setImageResource(R.mipmap.card_as);
+        int resourceId = (Integer) currentButton.getTag();
+        currentButton.setImageResource(resourceId);
+
         if(previousButton != null) {
             previousButton.setImageResource(R.mipmap.card_blue_back);
         }
-
-
         previousButton = currentButton;
     }
 
