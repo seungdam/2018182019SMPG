@@ -13,8 +13,9 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:id="@+id/scoreTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textSize="30sp"
             android:layout_weight="1"
             android:text="Filps : 0"
@@ -30,8 +31,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_weight="1"
         >
         <ImageButton
@@ -51,8 +50,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_weight="1"
         >
         <ImageButton
@@ -72,8 +69,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_weight="1"
         >
         <ImageButton
@@ -93,8 +88,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_weight="1"
         >
         <ImageButton
