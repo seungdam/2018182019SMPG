@@ -51,19 +51,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ImageButton currentButton = (ImageButton) view;
+
         if(previousButton == currentButton) {
             Log.d(TAG, "This card Already pressed");
             return;
         }
         Log.d(TAG,"card pressed " + btnIndex);
 
-        int resourceId = (Integer) currentButton.getTag();
-        currentButton.setImageResource(resourceId);
+        int prevResourceId = 0;
 
         if(previousButton != null) {
-            previousButton.setImageResource(R.mipmap.card_blue_back);
+            prevResourceId =  (Integer) previousButton.getTag();
         }
-        previousButton = currentButton;
+
+        int curResourceId = (Integer) currentButton.getTag();
+        currentButton.setImageResource(curResourceId);
+
+        if(curResourceId != prevResourceId) {
+            currentButton.setImageResource(curResourceId);
+            if(previousButton != null) {
+                previousButton.setImageResource(R.mipmap.card_blue_back);
+            }
+            previousButton = currentButton;
+        }
+        else {
+            currentButton.setVisibility(View.INVISIBLE);
+            previousButton.setVisibility(View.INVISIBLE);
+            previousButton = null;
+        }
     }
 
     private int findButtonIndex(int id) {
