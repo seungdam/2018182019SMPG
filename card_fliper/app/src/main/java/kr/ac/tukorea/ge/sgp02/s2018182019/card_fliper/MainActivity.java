@@ -1,13 +1,16 @@
 package kr.ac.tukorea.ge.sgp02.s2018182019.card_fliper;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,6 +104,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnRestart(View view) {
         Log.d(TAG,"restart pressed");
+        askRetry();
+    }
+
+    private void askRetry() {
+      new AlertDialog.Builder(this)
+               .setTitle("RESTART")
+               .setMessage("Are you really wanna restart game?")
+               .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+                       startGame();
+                   }
+               })
+               .setNegativeButton("no",null)
+               .create()
+               .show();
     }
 }
 
