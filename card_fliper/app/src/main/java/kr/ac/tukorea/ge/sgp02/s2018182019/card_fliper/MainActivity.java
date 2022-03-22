@@ -15,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void onBtnCard(View view) {
+        Log.d(TAG,"card pressedd" + view.getId());
+    }
+    public void onBtnRestart(View view) {
+        Log.d(TAG,"restart pressed");
+    }
 }
 
-public void onBtnCard(View view) {
-    Log.d(TAG,"card pressedd" + view.getId());
-}
 
-public void onBtnRestart(View view) {
-    Log.d(TAG,"restart pressed");
-}
+
