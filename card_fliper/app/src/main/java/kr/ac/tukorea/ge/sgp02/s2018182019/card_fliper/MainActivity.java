@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int MYDURATION = 1000;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int[] BUTTON_IDS = new int[] {
             R.id.card_00,R.id.card_01,R.id.card_02,R.id.card_03,
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView scoreTextView;
     private int flips;
     private Random r;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame() {
+        Log.d(TAG, "prevCard : " + previousButton);
+        previousButton = null;
         int randomIdx[] = new int[16];
         r = new Random();
         for(int i = 0; i < 16; ++i) {
@@ -54,9 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
         for(int i  = 0; i < imageResourceIds.length; ++i) {
             int resourceId = imageResourceIds[randomIdx[i]];
             ImageButton btn = findViewById(BUTTON_IDS[i]);
+            btn.setImageResource(R.mipmap.card_blue_back);
+            btn.setVisibility(View.VISIBLE);
             btn.setTag(resourceId);
         }
         setScore(0);
@@ -76,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton currentButton = (ImageButton) view;
 
+
+
         if(previousButton == currentButton) {
             Log.d(TAG, "This card Already pressed");
             return;
         }
-        Log.d(TAG,"card pressed " + btnIndex);
+        // Log.d(TAG,"card pressed " + btnIndex);
 
         int prevResourceId = 0;
 
@@ -101,12 +109,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(getApplicationContext(), "Greate", Toast.LENGTH_SHORT).show();
+
             currentButton.setVisibility(View.INVISIBLE);
             previousButton.setVisibility(View.INVISIBLE);
-            previousButton = null;
             setScore(flips + 1);
             if (flips == 8) {
                 askRetry();
+
             }
         }
     }
@@ -133,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
                        startGame();
+
                    }
                })
                .setNegativeButton("no",null)
@@ -140,6 +150,4 @@ public class MainActivity extends AppCompatActivity {
                .show();
     }
 }
-
-
 
