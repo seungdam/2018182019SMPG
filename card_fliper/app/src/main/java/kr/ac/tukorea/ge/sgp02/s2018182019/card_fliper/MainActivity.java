@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,13 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setScore(int flips) {
         this.flips = flips;
-        scoreTextView.setText("Filps : " + flips);
+        Resources resForText = getResources();
+        String txtFmt = getString(R.string.flips_fmt);
+        String scoreText = String.format(txtFmt,flips);
+        scoreTextView.setText(scoreText);
     }
 
     public void onBtnCard(View view) {
         int btnIndex = findButtonIndex(view.getId());
         if(!(view instanceof ImageButton)) {
-            Log.e(TAG, "Not an imagebutton: " + view);
+            Log.e(TAG, "Not an imageButton: " + view);
             return;
         }
 
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(previousButton == currentButton) {
             Log.d(TAG, "This card Already pressed");
+            Toast.makeText(getApplicationContext(), R.string.same_card, Toast.LENGTH_SHORT).show();
             return;
         }
         // Log.d(TAG,"card pressed " + btnIndex);
@@ -143,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void askRetry() {
       new AlertDialog.Builder(this)
-               .setTitle("RESTART")
+               .setTitle(R.string.dlg_restart)
                .setMessage(R.string.ask)
                .setPositiveButton(R.string.dig_yes, new DialogInterface.OnClickListener() {
                    @Override

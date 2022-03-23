@@ -3,7 +3,10 @@
     <string name="app_name">카드게임</string>
     <string name="restart">재시작</string>
     <string name="great">잘했어요</string>
-    <string name="ask">정말 게임을 종료하시겠습니까?</string>
+    <string name="ask">정말 게임을 재시작 하시겠습니까?</string>
     <string name="dlg_no">아니오</string>
     <string name="dig_yes">예</string>
+    <string name="flips_fmt">뒤집은 횟수 : %d</string>
+    <string name="dlg_restart">재시작 창</string>
+    <string name="same_card">이미 눌러진 카드입니다.</string>
 </resources>
