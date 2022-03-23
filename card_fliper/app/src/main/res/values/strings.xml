@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">card_fliper</string>
+    <string name="restart">RESTART</string>
+    <string name="great">Great</string>
+    <string name="ask">Are you really wanna restart game?</string>
+    <string name="dig_yes">yes</string>
+    <string name="dlg_no">no</string>
 </resources>

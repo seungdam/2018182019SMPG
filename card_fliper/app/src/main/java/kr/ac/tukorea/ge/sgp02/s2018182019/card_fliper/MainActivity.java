@@ -16,7 +16,6 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int MYDURATION = 1000;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int[] BUTTON_IDS = new int[] {
             R.id.card_00,R.id.card_01,R.id.card_02,R.id.card_03,
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton previousButton;
     private TextView scoreTextView;
     private int flips;
+    private int restCard;
     private Random r;
 
     @Override
@@ -47,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame() {
+        restCard = 16;
         Log.d(TAG, "prevCard : " + previousButton);
         previousButton = null;
+
         int randomIdx[] = new int[16];
         r = new Random();
+
         for(int i = 0; i < 16; ++i) {
             randomIdx[i] = r.nextInt(16);
             for(int j = 0; j < i; ++j) {
@@ -108,14 +111,16 @@ public class MainActivity extends AppCompatActivity {
                 previousButton.setImageResource(R.mipmap.card_blue_back);
             }
             previousButton = currentButton;
+            setScore(flips + 1);
         }
         else {
-            Toast.makeText(getApplicationContext(), "Greate", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.great, Toast.LENGTH_SHORT).show();
 
             currentButton.setVisibility(View.INVISIBLE);
             previousButton.setVisibility(View.INVISIBLE);
             setScore(flips + 1);
-            if (flips == 8) {
+            restCard -= 2;
+            if (0 ==restCard) {
                 askRetry();
 
             }
@@ -139,15 +144,15 @@ public class MainActivity extends AppCompatActivity {
     private void askRetry() {
       new AlertDialog.Builder(this)
                .setTitle("RESTART")
-               .setMessage("Are you really wanna restart game?")
-               .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+               .setMessage(R.string.ask)
+               .setPositiveButton(R.string.dig_yes, new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
                        startGame();
 
                    }
                })
-               .setNegativeButton("no",null)
+               .setNegativeButton(R.string.dlg_no,null)
                .create()
                .show();
     }

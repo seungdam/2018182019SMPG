@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">카드게임</string>
+    <string name="restart">재시작</string>
+    <string name="great">잘했어요</string>
+    <string name="ask">정말 게임을 종료하시겠습니까?</string>
+    <string name="dlg_no">아니오</string>
+    <string name="dig_yes">예</string>
+</resources>
