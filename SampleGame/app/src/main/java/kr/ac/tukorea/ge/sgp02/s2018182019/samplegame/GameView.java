@@ -18,7 +18,7 @@ public class GameView extends View {
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
     int ballDX, ballDY; // 공들의 이동변화량 = 속도
-    private Handler handler = new Handler();
+
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -44,14 +44,13 @@ public class GameView extends View {
         // 화면을 갱신 시키는 함수. 생성자 호출 제외
         invalidate();
 
-        //핸들러는 runnable 객체를 전달 할 수 있다.
-        handler.post(new Runnable() { // 메세지를 보낸다고 해석하면된다.
+        // 핸들러 객체를 따로 생성하지 않고 뷰가 가지는 핸들러로 이를 수행하자.
+        post(new Runnable() { // 메세지를 보낸다고 해석하면된다.
             @Override
             public void run() {
                 updateFrame(); // updateFrame이라는 기능을 수행하라고 메세지를 보낸다.
             }
         });
-
     }
 
     private void update() {
