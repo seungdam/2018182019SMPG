@@ -17,7 +17,7 @@ public class GameView extends View {
     private Bitmap soccerBitmap;
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
-
+    int ballDX, ballDY; // 공들의 이동변화량 = 속도
     private Handler handler = new Handler();
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
@@ -32,22 +32,49 @@ public class GameView extends View {
         soccerSrcRect.set(0,0,soccerBitmap.getWidth(),soccerBitmap.getHeight());
         soccerDstRect.set(0,0,200,200);
 
+        ballDX = 10;
+        ballDY = 10;
+
         updateFrame();
 
     }
     // 축구공을 움직여 보자
     private void updateFrame() {
-        soccerDstRect.offset(1,1);
-
+        update();
         // 화면을 갱신 시키는 함수. 생성자 호출 제외
         invalidate();
-        handler.post(new Runnable() {
+
+        //핸들러는 runnable 객체를 전달 할 수 있다.
+        handler.post(new Runnable() { // 메세지를 보낸다고 해석하면된다.
             @Override
             public void run() {
-                updateFrame();
+                updateFrame(); // updateFrame이라는 기능을 수행하라고 메세지를 보낸다.
             }
         });
 
+    }
+
+    private void update() {
+        soccerDstRect.offset(ballDX,ballDY);
+
+        if (ballDX > 0) {
+            if (soccerDstRect.right > getWidth()) {
+                ballDX = -ballDX;
+            }
+        } else {
+            if (soccerDstRect.left < 0) {
+                ballDX = -ballDX;
+            }
+        }
+        if (ballDY > 0) {
+            if (soccerDstRect.bottom > getHeight()) {
+                ballDY = -ballDY;
+            }
+        } else {
+            if (soccerDstRect.top < 0) {
+                ballDY = -ballDY;
+            }
+        }
     }
 
     // 모든 그리기 작업
